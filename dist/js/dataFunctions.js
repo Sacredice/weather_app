@@ -62,7 +62,7 @@ export const getForecastFromCoords = async (locationObj) => {
     }
 
     try {
-        const dataStream = await fetch("./netlify/serverless/get_forecast", {
+        const dataStream = await fetch("./netlify/functions/get_forecast", {
             method: "POST",
             body: JSON.stringify(urlDataObj)
         });
