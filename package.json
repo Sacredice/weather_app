@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Sacredice/weather_app/tree/master#readme",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.2"
   }
 }
