@@ -13,47 +13,95 @@ export const getHomeLocation = () => {
 };
 
 export const getWeatherFromCoords = async (locationObj) => {
-    const lat = locationObj.getLat();
-    const lon = locationObj.getLon();
-    const units = locationObj.getUnit();
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
+    // const lat = locationObj.getLat();
+    // const lon = locationObj.getLon();
+    // const units = locationObj.getUnit();
+    // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
+    // try {
+    //     const weatherStream = await fetch(url);
+    //     const weatherJson = weatherStream.json();
+    //     return weatherJson;
+    // } catch (err) {
+    //     console.error(err);
+    // }
+
+    const urlDataObj = {
+        lat: locationObj.getLat(),
+        lon: locationObj.getLon(),
+        units: locationObj.getUnit()
+    };
     try {
-        const weatherStream = await fetch(url);
+        const weatherStream = await fetch("./.netlify/functions/get_weather", {
+            method: "POST",
+            body: JSON.stringify(urlDataObj)
+        });
         const weatherJson = weatherStream.json();
         return weatherJson;
     } catch (err) {
         console.error(err);
     }
-};
+}
 
 export const getForecastFromCoords = async (locationObj) => {
-    const lat = locationObj.getLat();
-    const lon = locationObj.getLon();
-    const units = locationObj.getUnit();
-    const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
+    // const lat = locationObj.getLat();
+    // const lon = locationObj.getLon();
+    // const units = locationObj.getUnit();
+    // const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
+    // try {
+    //     const forecastStream = await fetch(url);
+    //     const forecastJson = forecastStream.json();
+    //     return forecastJson;
+    // } catch (err) {
+    //     console.error(err);
+    // }
+
+    const urlDataObj = {
+        lat: locationObj.getLat(),
+        lon: locationObj.getLon(),
+        units: locationObj.getUnit()
+    }
+
     try {
-        const forecastStream = await fetch(url);
-        const forecastJson = forecastStream.json();
-        return forecastJson;
+        const dataStream = await fetch("./netlify/serverless/get_forecast", {
+            method: "POST",
+            body: JSON.stringify(urlDataObj)
+        });
+        const dataJson = dataStream.json();
+        return dataJson;
     } catch (err) {
         console.error(err);
     }
 }
 
 export const getCoordsFromApi = async (entryText, units) => {
-    const regex = /^\d+$/g;
-    const flag = regex.test(entryText) ? "zip" : "q";
-    const url = `https://api.openweathermap.org/data/2.5/weather?${flag}=${entryText}&untis=${units}&appid=${WEATHER_API_KEY}`;
-    const encodedUrl = encodeURI(url);
+    // const regex = /^\d+$/g;
+    // const flag = regex.test(entryText) ? "zip" : "q";
+    // const url = `https://api.openweathermap.org/data/2.5/weather?${flag}=${entryText}&untis=${units}&appid=${WEATHER_API_KEY}`;
+    // const encodedUrl = encodeURI(url);
     // console.log("encodedURL");
     // console.log(url);
-    try {
-        const dataStream = await fetch(encodedUrl);
-        const jsonData = dataStream.json();
+    // try {
+    //     const dataStream = await fetch(encodedUrl);
+    //     const jsonData = dataStream.json();
 
-        return jsonData;
+    //     return jsonData;
+    // } catch (err) {
+    //     console.error(err.stack);
+    // }
+
+    const urlDataObj = {
+        text: entryText,
+        units: units
+    }
+    try {
+        const dataStream = await fetch("./.netlify/functions/get_coords", {
+            method: "POST",
+            body: JSON.stringify(urlDataObj)
+        });
+        const dataJson = dataStream.json();
+        return dataJson;
     } catch (err) {
-        console.error(err.stack);
+        console.error(err);
     }
 }
 
