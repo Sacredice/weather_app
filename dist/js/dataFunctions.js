@@ -71,6 +71,7 @@ export const getForecastFromCoords = async (locationObj) => {
     } catch (err) {
         console.error(err);
     }
+    console.log(dataJson);
 }
 
 export const getCoordsFromApi = async (entryText, units) => {
