@@ -1,6 +1,4 @@
 [build]
-    publish = "dist"
+    publish = "dist/"
 
-    functions = "serverless"
-
-    node_bundler = "zisi"
+    functions = "serverless/"
