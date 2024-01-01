@@ -11,7 +11,7 @@ exports.handler = async (event, context) => {
     const encodedUrl = encodeURI(url);
     try {
         const dataStream = await fetch(encodedUrl);
-        const dataJson = dataStream.json();
+        const dataJson = await dataStream.json();
         return {
             statusCode: 200,
             body: JSON.stringify(dataJson)

@@ -19,7 +19,7 @@ export const getWeatherFromCoords = async (locationObj) => {
     // const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
     // try {
     //     const weatherStream = await fetch(url);
-    //     const weatherJson = weatherStream.json();
+    //     const weatherJson = await weatherStream.json();
     //     return weatherJson;
     // } catch (err) {
     //     console.error(err);
@@ -49,7 +49,7 @@ export const getForecastFromCoords = async (locationObj) => {
     // const url = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=${units}`;
     // try {
     //     const forecastStream = await fetch(url);
-    //     const forecastJson = forecastStream.json();
+    //     const forecastJson = await forecastStream.json();
     //     return forecastJson;
     // } catch (err) {
     //     console.error(err);
@@ -83,7 +83,7 @@ export const getCoordsFromApi = async (entryText, units) => {
     // console.log(url);
     // try {
     //     const dataStream = await fetch(encodedUrl);
-    //     const jsonData = dataStream.json();
+    //     const jsonData = await dataStream.json();
 
     //     return jsonData;
     // } catch (err) {
